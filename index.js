@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import multer from 'multer';
+import dotenv from 'dotenv';
 
 import {
   registerValidation,
@@ -11,10 +12,11 @@ import {
 import { handleValidationErrors, checkAuth } from './utils/index.js';
 
 import { UserController, PostController } from './controllers/index.js';
+dotenv.config();
 
 mongoose
   .connect(
-    'mongodb+srv://bekzod:bekzod77@cluster0.2bcvsl1.mongodb.net/blog?retryWrites=true&w=majority'
+    'mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASS}@cluster0.2bcvsl1.mongodb.net/blog?retryWrites=true&w=majority'
   )
   .then(() => {
     console.log('DB ok');
